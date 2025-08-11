@@ -1,18 +1,25 @@
 # Language Detector
-from langdetect import detect
+from langdetect import detect, DetectorFactory
+DetectorFactory.seed = 0  # Ensure consistent results
 
-# Detecting languages from input text
-language1 = detect('¿Qué te gusta hacer')  
-language2 = detect('Nyasae no omuya') 
+def detect_language(text):
+    """Detect the language of a given text and return code + name."""
+    lang_code = detect(text)
+    language_mapping = {
+        'es': 'Spanish',
+        'en': 'English',
+        'sw': 'Swahili',
+        'guz': 'Kisii'  # ISO 639-3 code for Ekegusii (Kisii)
+    }
+    return lang_code, language_mapping.get(lang_code, lang_code)
 
-# Mapping of language codes to human-readable names
-language_mapping = {
-    'es': 'Spanish',
-    'en': 'English',
-    'sw': 'Swahili',
-    'ek': 'Kisii'  
-}
+# Sample texts
+texts = [
+    '¿Qué te gusta hacer',
+    'Nyasae no omuya'
+]
 
-# Print the detected language in a more user-friendly format
-print(f'This is the {language_mapping.get(language1, language1)} language shortened by: {language1}')
-print(f'This is the {language_mapping.get(language2, language2)} language shortened by: {language2}')
+# Detect and print results
+for text in texts:
+    code, name = detect_language(text)
+    print(f'This is the {name} language shortened by: {code}')
