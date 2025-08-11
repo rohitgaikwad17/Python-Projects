@@ -1,62 +1,60 @@
-import random       # also do with numpy (from numpy import random)
+from numpy import random  # Using NumPy random
 
-
-# ------------ function definition
+# Dice faces stored in a dictionary
+dice_faces = {
+    1: [
+        "-----------",
+        "|         |",
+        "|    0    |",
+        "|         |",
+        "-----------"
+    ],
+    2: [
+        "-----------",
+        "|         |",
+        "| 0     0 |",
+        "|         |",
+        "-----------"
+    ],
+    3: [
+        "-----------",
+        "|    0    |",
+        "|    0    |",
+        "|    0    |",
+        "-----------"
+    ],
+    4: [
+        "-----------",
+        "| 0     0 |",
+        "|         |",
+        "| 0     0 |",
+        "-----------"
+    ],
+    5: [
+        "-----------",
+        "| 0     0 |",
+        "|    0    |",
+        "| 0     0 |",
+        "-----------"
+    ],
+    6: [
+        "-----------",
+        "| 0  0  0 |",
+        "|         |",
+        "| 0  0  0 |",
+        "-----------"
+    ]
+}
 
 def roll_dice():
-    number = random.randint(1,6)
-    if number == 1:
-        print("-----------")
-        print("|         |")
-        print("|    0    |")
-        print("|         |")
-        print("-----------")
+    number = random.randint(1, 7)  # 1 to 6 (upper bound exclusive)
+    for line in dice_faces[number]:
+        print(line)
 
-    elif number == 2:
-        print("-----------")
-        print("|         |")
-        print("| 0     0 |")
-        print("|         |")
-        print("-----------")
+print("                         Dice Simulator                  ")
 
-    elif number == 3:
-        print("-----------")
-        print("|    0    |")
-        print("|    0    |")
-        print("|    0    |")
-        print("-----------")
-
-    elif number == 4:
-        print("-----------")
-        print("| 0     0 |")
-        print("|         |")
-        print("| 0     0 |")
-        print("-----------")
-
-    elif number == 5:
-        print("-----------")
-        print("| 0     0 |")
-        print("|    0    |")
-        print("| 0     0 |")
-        print("-----------")
-
-    elif number == 6:
-        print("-----------")
-        print("| 0  0  0 |")
-        print("|         |")
-        print("| 0  0  0 |")
-        print("-----------")
-
-
-print("                         Dics Simulator                  ")
-x = 'y'
-while x.lower() == "y":
-    roll_dice()             # function call
-    choice = input("Do you want to play again (y/n): ")       # choice from user
-
-    if choice.lower() == "n":
-        exit(0)
-
-
-
-
+while True:
+    roll_dice()
+    choice = input("Do you want to play again (y/n): ").lower()
+    if choice == "n":
+        break
